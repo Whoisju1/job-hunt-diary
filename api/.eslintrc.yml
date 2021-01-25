@@ -13,7 +13,7 @@ plugins:
 rules:
   indent:
     - error
-    - 4
+    - 2
   linebreak-style:
     - error
     - unix
@@ -23,3 +23,24 @@ rules:
   semi:
     - error
     - always
+  sort-keys:
+    - error
+    - asc
+    - caseSensitive: true
+      natural: true
+      miniKeys: true
+  sort-imports:
+    - error
+    - asc
+  spaced-comment:
+    - error
+  block-spacing:
+    - error
+    - always
+  eol-last:
+    - error
+    - always
+  no-trailing-spaces:
+    - error
+  no-var:
+    - error
