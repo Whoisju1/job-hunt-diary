@@ -1,13 +1,21 @@
-import { gql } from 'apollo-server';
+import jobApplication from './jobApplication';
+import company from './company';
+import note from './note';
+import position from './position';
+import contact from './contact';
+import root from './root';
+import user from './user';
+import shared from './shared';
 
-export default gql`
-  type Book {
-    id: ID!
-    author: String
-    title: String
-  }
+const schema = [
+  jobApplication,
+  company,
+  note,
+  position,
+  contact,
+  root,
+  user,
+  shared
+];
 
-  type Query {
-    books: [Book]
-  }
-`;
+export default schema;

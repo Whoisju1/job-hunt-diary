@@ -1,5 +1,17 @@
-export default {
-  Query: {
-    books: () => [{ id: 'afdfdsa0', author: 'Jon Harris', title: 'Social Justice Goes to Church' }],
+const resolvers = {
+  Data: {
+    __resolveType: (obj: any) => {
+      if (obj.__typename === 'JobApplication') {
+        return [];
+      }
+    }
   },
+  Query: {
+
+  },
+  Mutation: {
+
+  }
 }
+
+export default resolvers;
