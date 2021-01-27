@@ -1,5 +1,5 @@
 import { ApolloServer } from 'apollo-server';
-import typeDefs from '../typeDefs';
+import { typeDefs } from '../domains';
 
 export const server = new ApolloServer({
   typeDefs,
