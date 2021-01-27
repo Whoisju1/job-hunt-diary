@@ -1,5 +1,5 @@
 import { DocumentNode } from 'graphql/language';
-import * as jobApplication from './job-application';
+import * as jobApplication from './jobApplication';
 import * as company from './company';
 import * as contact from './contact';
 import * as note from './note';
