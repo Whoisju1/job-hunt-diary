@@ -8,7 +8,7 @@ do
   echo Creating domain files and folders
   cd $targetPath &&
   mkdir $folder && cd $folder &&
-  touch ./{index,typeDef,resolver,$folder.unit}.ts
+  touch ./{index,typeDef,resolver,data,$folder.unit.test}.ts
 
   printf "import { gql } from 'apollo-server';\n" >> ./typeDef.ts &&
   printf "export default gql\`\n  # ...\n\`;\n" >> ./typeDef.ts &&
