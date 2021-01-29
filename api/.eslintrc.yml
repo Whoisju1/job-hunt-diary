@@ -10,4 +10,69 @@ parserOptions:
   sourceType: module
 plugins:
   - '@typescript-eslint'
-rules: {}
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
+  eqeqeq:
+    - error
+    - smart
+  vars-on-top:
+    - warn
+  no-unused-vars:
+    - error
+  template-curly-spacing:
+    - error
+    - never
+  wrap-iife:
+    - error
+    - outside
+  capitalized-comments:
+    - warn
+    - always
+  comma-dangle:
+    - error
+    - always-multiline
+  comma-spacing:
+    - error
+    - before: false
+      after: true
+  comma-style:
+    - error
+    - last
+  eol-last:
+    - error
+    - always
+  key-spacing:
+    - error
+    - beforeColon: false
+      afterColon: true
+      mode: strict
+  max-depth:
+    - warn
+    - max: 4
+  no-multiple-empty-lines:
+    - warn
+  no-trailing-spaces:
+    - error
+  sort-keys:
+    - error
+  sort-vars:
+    - error
+  prefer-const:
+    - error
+  prefer-template:
+    - error
+  prefer-destructuring:
+    - error
+    - object: true
+      array: true
