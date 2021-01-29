@@ -11,7 +11,17 @@ input ListParams {
   order: Order = ASC
   limit: Int
   start: Int = 0
+  "When 'GetAll' is true 'limit' and 'start' are ignored and all the items are retrieved."
+  operator: Operator
   getAll: Boolean
+  value: String
+}
+
+enum Operator {
+  eq,
+  not_eq,
+  gt,
+  lt
 }
 
 enum Order {

@@ -10,37 +10,4 @@ parserOptions:
   sourceType: module
 plugins:
   - '@typescript-eslint'
-rules:
-  indent:
-    - error
-    - 2
-  linebreak-style:
-    - error
-    - unix
-  quotes:
-    - error
-    - single
-  semi:
-    - error
-    - always
-  sort-keys:
-    - error
-    - asc
-    - caseSensitive: true
-      natural: true
-      miniKeys: true
-  sort-imports:
-    - error
-    - asc
-  spaced-comment:
-    - error
-  block-spacing:
-    - error
-    - always
-  eol-last:
-    - error
-    - always
-  no-trailing-spaces:
-    - error
-  no-var:
-    - error
+rules: {}
