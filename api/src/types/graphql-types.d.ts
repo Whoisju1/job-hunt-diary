@@ -231,8 +231,6 @@ export enum CacheControlScope {
 }
 
 
-
-
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 

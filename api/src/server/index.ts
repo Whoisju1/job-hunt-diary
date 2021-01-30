@@ -3,5 +3,5 @@ import { typeDefs } from '../domains';
 
 export const server = new ApolloServer({
   typeDefs,
-  mocks: true
+  mocks: true,
 });
