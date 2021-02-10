@@ -62,6 +62,7 @@ rules:
     - max: 4
   no-multiple-empty-lines:
     - warn
+    - maxEOF: 1
   no-trailing-spaces:
     - error
   sort-keys:
