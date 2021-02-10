@@ -9,6 +9,9 @@ export default gql`
     stage: String
     requirements: [String]
     jobApplication: JobApplication
+    compensation: String
+    rating: String
+    benefits: String
   }
 
   input PositionInput {

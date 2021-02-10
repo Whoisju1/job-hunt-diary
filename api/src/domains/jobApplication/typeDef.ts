@@ -8,19 +8,19 @@ export default gql`
     dateCreated: String!
     dateUpdated: String
     dateApplied: String
-    compensation: String
-    requirements: [String]
-    source: String
+    jobPostingInfo: JobPostingInfo
     notes: [Note]
     contacts: [Contact]
+  }
+
+  type JobPostingInfo {
+    sorce: String
   }
 
   input JobApplicationInput {
     position: PositionInput
     company: CompanyInput
     dateApplied: String
-    compensation: String
-    requirements: [String]
     notes: [NoteInput]
     contacts: [ContactInput]
   }
