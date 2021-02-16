@@ -6,11 +6,10 @@ export default gql`
     name: String
     company: String
     notes: [Note]
-    stage: String
     requirements: [String]
     jobApplication: JobApplication
     compensation: String
-    rating: String
+    rating: Float
     benefits: String
   }
 

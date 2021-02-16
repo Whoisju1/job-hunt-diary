@@ -10,6 +10,7 @@ export default gql`
     dateApplied: String
     jobPostingInfo: JobPostingInfo
     notes: [Note]
+    status: String!
     contacts: [Contact]
   }
 
