@@ -58,11 +58,13 @@ CREATE TABLE IF NOT EXISTS `contact` (
 -- Create contact_note table
 CREATE TABLE IF NOT EXISTS `contact_note` (
   `contactId` INT UNSIGNED NOT NULL,
-  `noteId` INT UNSIGNED NOT NULL,
+  `noteId` INT UNSIGNED NOT NULL UNIQUE,
   `dateCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `dateUpdated` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (`contactId`) REFERENCES contact(`id`),
-  FOREIGN KEY (`noteId`) REFERENCES note(`id`),
+  FOREIGN KEY (`noteId`)
+    REFERENCES note(`id`)
+    ON DELETE CASCADE,
   PRIMARY KEY(`contactId`, `noteId`)
 ) ENGINE = InnoDB;
 
@@ -78,13 +80,18 @@ CREATE TABLE IF NOT EXISTS `job_application` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255),
   `dateCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `dateUpdated` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `dateUpdated` DATETIME DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
   `dateApplied` DATETIME,
   `jobPostingInfo` TEXT,
+  `ownerId` Int UNSIGNED NOT NULL,
   `statusId` Int UNSIGNED NOT NULL,
   `job_posting_info_id` INT UNSIGNED,
-  FOREIGN KEY(`statusId`) REFERENCES `status`(`id`),
-  FOREIGN KEY(`job_posting_info_id`) REFERENCES `job_posting_info`(`id`),
+  FOREIGN KEY(`statusId`)
+    REFERENCES `status`(`id`),
+  FOREIGN KEY(`job_posting_info_id`)
+    REFERENCES `job_posting_info`(`id`)
+    ON DELETE CASCADE,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
@@ -92,8 +99,11 @@ CREATE TABLE IF NOT EXISTS `job_application` (
 CREATE TABLE IF NOT EXISTS `job_application_contact` (
   `jobApplicationId` INT UNSIGNED NOT NULL,
   `contactId` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`jobApplicationId`) REFERENCES `job_application`(`id`),
-  FOREIGN KEY (`contactId`) REFERENCES `contact`(`id`)
+  FOREIGN KEY (`jobApplicationId`)
+    REFERENCES `job_application`(`id`),
+  FOREIGN KEY (`contactId`)
+    REFERENCES `contact`(`id`)
+    ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 --  Create company table
@@ -111,22 +121,27 @@ CREATE TABLE IF NOT EXISTS `company` (
 -- Create company_note_table
 CREATE TABLE IF NOT EXISTS `company_note` (
   `companyId` INT UNSIGNED NOT NULL,
-  `noteId` INT UNSIGNED NOT NULL,
+  `noteId` INT UNSIGNED NOT NULL UNIQUE,
   `dateCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `dateUpdated` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (`companyId`) REFERENCES `company`(`id`),
-  FOREIGN KEY (`noteId`) REFERENCES `note`(`id`),
+  FOREIGN KEY (`noteId`)
+    REFERENCES `note`(`id`)
+    ON DELETE CASCADE,
   PRIMARY KEY(`companyId`, `noteId`)
 ) ENGINE = InnoDB;
 
 -- Create job_application_note table
 CREATE TABLE IF NOT EXISTS `job_application_notes` (
   `jobApplicationId` INT UNSIGNED NOT NULL,
-  `noteId` INT UNSIGNED NOT NULL,
+  `noteId` INT UNSIGNED NOT NULL UNIQUE,
   `dateCreated` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `dateUpdated` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (`jobApplicationId`) REFERENCES `job_application`(`id`),
-  FOREIGN KEY (`noteId`) REFERENCES `note`(`id`),
+  FOREIGN KEY (`jobApplicationId`)
+    REFERENCES `job_application`(`id`),
+  FOREIGN KEY (`noteId`)
+    REFERENCES `note`(`id`)
+    ON DELETE CASCADE,
   PRIMARY KEY(`jobApplicationId`, `noteId`)
 ) ENGINE = InnoDB;
 
@@ -140,8 +155,10 @@ CREATE TABLE IF NOT EXISTS `position` (
   `rating` Float(2, 1),
   `benefits` VARCHAR(255),
   `jobApplicationId` INT UNSIGNED NOT NULL,
-  FOREIGN KEY (`statusId`) REFERENCES `status`(`id`),
-  FOREIGN KEY (`jobApplicationId`) REFERENCES `job_application`(`id`),
+  FOREIGN KEY (`statusId`)
+    REFERENCES `status`(`id`),
+  FOREIGN KEY (`jobApplicationId`)
+    REFERENCES `job_application`(`id`),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
@@ -153,3 +170,5 @@ CREATE TABLE IF NOT EXISTS `position_requirement` (
   FOREIGN KEY (`positionId`) REFERENCES `position`(`id`),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+-- TODO: Create triggers that delete all notes associated with entity being deleted
