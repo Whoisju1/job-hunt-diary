@@ -1,5 +1,11 @@
 import { server } from './server';
-import './db';
+import sequelize from './db';
 
-server.listen()
-  .then(({ url }) => console.log(`🚀 Server ready at ${url}`));
+(async () => {
+  await sequelize.authenticate();
+  console.log('Database connection has been established successfully.');
+
+  const { url } = await server.listen();
+  console.log(`🚀 Server ready at ${url}`);
+})();
+
