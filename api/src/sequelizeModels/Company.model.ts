@@ -1,21 +1,21 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, ForeignKey, IsEmail } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, AutoIncrement, AllowNull, ForeignKey, IsEmail, NotNull } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 interface ICompany {
-  id: string;
+  id: number;
   name: string;
   location: string;
   phone: string;
   email: string;
-  jobApplicationId: string;
+  jobApplicationId: number;
 }
 
 @Table
 export class Company extends Model implements ICompany {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  id!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
   @Column(DataType.STRING)
   name!: string;
@@ -34,7 +34,6 @@ export class Company extends Model implements ICompany {
   email!: string;
 
   @ForeignKey(() => JobApplication)
-  @Column(DataType.STRING)
-  jobApplicationId!: string;
-
+  @Column(DataType.INTEGER)
+  jobApplicationId!: number;
 }

@@ -3,8 +3,8 @@ import { Contact } from './Contact.model';
 import { Note } from './Note.model';
 
 interface IContactNote {
-  contactId: string;
-  noteId: string;
+  contactId: number;
+  noteId: number;
 }
 
 @Table({
@@ -12,14 +12,12 @@ interface IContactNote {
   updatedAt: true,
 })
 export class ContactNote extends Model implements IContactNote {
-  @IsUUID(4)
   @ForeignKey(() => Contact)
-  @Column(DataType.UUIDV4)
-  contactId!: string;
+  @Column(DataType.INTEGER)
+  contactId!: number;
 
-  @IsUUID(4)
   @Unique
   @ForeignKey(() => Note)
-  @Column(DataType.UUIDV4)
-  noteId!: string;
+  @Column(DataType.INTEGER)
+  noteId!: number;
 }

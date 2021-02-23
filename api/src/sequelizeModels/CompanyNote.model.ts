@@ -14,12 +14,12 @@ interface ICompanyNote {
 export class CompanyNote extends Model implements ICompanyNote {
   @IsUUID(4)
   @ForeignKey(() => Company)
-  @Column(DataType.UUIDV4)
+  @Column(DataType.STRING)
   companyId!: string;
 
   @IsUUID(4)
   @Unique
   @ForeignKey(() => Note)
-  @Column(DataType.UUIDV4)
+  @Column(DataType.STRING)
   noteId!: string;
 }

@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, IsEmail, HasMany } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, IsEmail, HasMany, Default, Sequelize, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 @Table({
@@ -6,12 +6,12 @@ import { JobApplication } from './JobApplication.model';
   updatedAt: true,
 })
 export class User extends Model {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  companyId!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
-  @Column(DataType.UUIDV4)
+  @Column(DataType.STRING)
   firstName!: string;
 
   @Column(DataType.STRING)

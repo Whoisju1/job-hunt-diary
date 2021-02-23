@@ -1,23 +1,23 @@
-import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, IsUUID, AllowNull, HasMany } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, IsUUID, AllowNull, HasMany, Default, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 import { PositionRequirement } from './PositionRequirement.model';
 
 interface IPosition {
-  id: string;
+  id: number;
   name: string;
   compensation: string;
   rating: number;
   benefits: string;
   requirements: PositionRequirement[];
-  jobApplicationId: string;
+  jobApplicationId: number;
 }
 
 @Table
 export class Position extends Model implements IPosition {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  id!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
   @Column(DataType.STRING)
   name!: string;
@@ -37,8 +37,7 @@ export class Position extends Model implements IPosition {
   @HasMany(() => PositionRequirement)
   requirements!: PositionRequirement[];
 
-  @IsUUID(4)
   @ForeignKey(() => JobApplication)
-  @Column(DataType.UUIDV4)
-  jobApplicationId!: string;
+  @Column(DataType.INTEGER)
+  jobApplicationId!: number;
 }

@@ -1,25 +1,24 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, ForeignKey } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, ForeignKey, Default, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 interface IJobPostingInfo {
-  id: string;
+  id: number;
   source: string;
-  jobApplication: string;
+  jobApplicationId: number;
 }
 
 @Table
 export class JobPostingInfo extends Model implements IJobPostingInfo {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  id!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
   @Column(DataType.STRING)
   source!: string;
 
-  @IsUUID(4)
   @ForeignKey(() => JobApplication)
-  @Column(DataType.UUIDV4)
-  jobApplication!: string;
+  @Column(DataType.INTEGER)
+  jobApplicationId!: number;
 }
 

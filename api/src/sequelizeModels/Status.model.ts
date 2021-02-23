@@ -1,18 +1,18 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsToMany, HasMany } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsToMany, HasMany, Default, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 interface IStatus {
-  id: string;
+  id: number;
   name: string;
   displayName: string;
 }
 
 @Table
 export class Status extends Model implements IStatus {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  id!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
   @Column(DataType.STRING)
   name!: string;

@@ -1,7 +1,7 @@
-import { Table, Model, DataType, Column, PrimaryKey, CreatedAt, IsUUID, AllowNull, BelongsTo } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, AutoIncrement, IsUUID, AllowNull, BelongsTo, Default } from 'sequelize-typescript';
 
 interface INote {
-  id: string;
+  id: number;
   body: string;
 }
 
@@ -10,10 +10,10 @@ interface INote {
   updatedAt: true,
 })
 export class Note extends Model implements INote {
-  @IsUUID(4)
   @PrimaryKey
-  @Column(DataType.UUIDV4)
-  id!: string;
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  id!: number;
 
   @AllowNull
   @Column(DataType.STRING)
