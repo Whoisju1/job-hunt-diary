@@ -13,10 +13,12 @@ interface ICompany {
 @Table
 export class Company extends Model implements ICompany {
   @PrimaryKey
+  @AllowNull(false)
   @AutoIncrement
   @Column(DataType.INTEGER)
   id!: number;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   name!: string;
 
@@ -33,6 +35,7 @@ export class Company extends Model implements ICompany {
   @Column(DataType.STRING)
   email!: string;
 
+  @AllowNull(false)
   @ForeignKey(() => JobApplication)
   @Column(DataType.INTEGER)
   jobApplicationId!: number;

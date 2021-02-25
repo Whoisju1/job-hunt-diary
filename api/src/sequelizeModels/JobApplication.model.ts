@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, HasMany, Default, AutoIncrement } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, HasMany, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
 import { JobApplicationNote } from './JobApplicationNote.model';
 import { JobPostingInfo } from './JobPostingInfo.model';
 import { User } from './User.model';
@@ -51,10 +51,12 @@ export class JobApplication extends Model implements IJobApplication {
   // @HasMany(() => Note, () => JobApplicationNote)
   // notes!: Note[]
 
+  @AllowNull(false)
   @ForeignKey(() => Status)
   @Column(DataType.INTEGER)
   statusId!: number;
 
+  @AllowNull(false)
   @ForeignKey(() => User)
   @Column(DataType.INTEGER)
   userId!: number;

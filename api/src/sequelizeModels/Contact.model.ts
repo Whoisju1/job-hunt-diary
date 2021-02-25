@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, CreatedAt, IsUUID, AllowNull, IsEmail, Default, AutoIncrement } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, CreatedAt, IsUUID, AllowNull, IsEmail, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
 
 @Table({
   createdAt: true,
@@ -10,13 +10,14 @@ export class Contact extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   firstName!: string;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   lastName!: string;
 
-  @AllowNull
   @Column(DataType.STRING)
   alias!: string;
 

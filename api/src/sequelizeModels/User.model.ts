@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, IsEmail, HasMany, Default, Sequelize, AutoIncrement } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, IsEmail, HasMany, Default, Sequelize, AutoIncrement, NotNull } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 @Table({
@@ -11,27 +11,29 @@ export class User extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   firstName!: string;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   lastName!: string;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   username!: string;
 
   @IsEmail
-  @AllowNull
   @Column(DataType.STRING)
   email!: string;
 
   @HasMany(() => JobApplication, { onDelete: 'CASCADE' })
   jobApplications!: JobApplication[]
 
-  @AllowNull
   @Column(DataType.STRING)
   phone!: string;
 
+  @AllowNull(false)
   @Column(DataType.STRING)
   hashedPass!: string;
 }

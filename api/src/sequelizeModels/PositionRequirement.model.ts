@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, IsUUID, Default, AutoIncrement } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, AutoIncrement, NotNull, AllowNull } from 'sequelize-typescript';
 import { Position } from './Position.model';
 
 interface IPositionRequirement {
@@ -17,6 +17,7 @@ export class PositionRequirement extends Model implements IPositionRequirement {
   @Column(DataType.STRING)
   requirement!: string;
 
+  @AllowNull(false)
   @ForeignKey(() => Position)
   @Column(DataType.INTEGER)
   positionId!: number;

@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, Unique } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, Unique, NotNull } from 'sequelize-typescript';
 import { Contact } from './Contact.model';
 import { Note } from './Note.model';
 
@@ -13,10 +13,12 @@ interface IContactNote {
 })
 export class ContactNote extends Model implements IContactNote {
   @ForeignKey(() => Contact)
+  @AllowNull(false)
   @Column(DataType.INTEGER)
   contactId!: number;
 
   @Unique
+  @AllowNull(false)
   @ForeignKey(() => Note)
   @Column(DataType.INTEGER)
   noteId!: number;
