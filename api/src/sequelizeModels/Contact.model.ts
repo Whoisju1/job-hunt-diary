@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, CreatedAt, IsUUID, AllowNull, IsEmail, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, AllowNull, IsEmail, AutoIncrement } from 'sequelize-typescript';
 
 @Table({
   createdAt: true,

@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, AutoIncrement, NotNull, AllowNull } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, AutoIncrement, AllowNull } from 'sequelize-typescript';
 import { Position } from './Position.model';
 
 interface IPositionRequirement {

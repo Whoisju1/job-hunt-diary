@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, Unique, NotNull } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, AllowNull, ForeignKey, Unique } from 'sequelize-typescript';
 import { Contact } from './Contact.model';
 import { Note } from './Note.model';
 

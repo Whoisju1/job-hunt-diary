@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsToMany, HasMany, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, AllowNull, HasMany, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 interface IStatus {

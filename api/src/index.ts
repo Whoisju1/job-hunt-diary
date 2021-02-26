@@ -1,10 +1,6 @@
 import { server } from './server';
 import sequelize from './db';
 
-import { AuthService } from './services/authService';
-
-const authService = new AuthService();
-
 (async () => {
   try {
     await sequelize.authenticate();

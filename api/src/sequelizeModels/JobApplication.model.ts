@@ -1,10 +1,8 @@
-import { Table, Model, DataType, Column, PrimaryKey, IsUUID, AllowNull, BelongsTo, HasOne, ForeignKey, HasMany, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
-import { JobApplicationNote } from './JobApplicationNote.model';
+import { Table, Model, DataType, Column, PrimaryKey, AllowNull, BelongsTo, HasOne, ForeignKey, AutoIncrement } from 'sequelize-typescript';
 import { JobPostingInfo } from './JobPostingInfo.model';
 import { User } from './User.model';
 import { Status } from './Status.model';
 import { Position } from './Position.model';
-import { Note } from './Note.model';
 
 interface IJobApplication {
   id: number;

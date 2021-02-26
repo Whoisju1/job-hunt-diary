@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, IsUUID, AllowNull, HasMany, Default, AutoIncrement, NotNull } from 'sequelize-typescript';
+import { Table, Model, DataType, Column, PrimaryKey, ForeignKey, AllowNull, HasMany, AutoIncrement } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 import { PositionRequirement } from './PositionRequirement.model';
 
