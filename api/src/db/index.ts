@@ -11,10 +11,10 @@ const {
 } = config;
 
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-  host,
   dialect: 'mysql',
-  port: parseInt(dbPort),
+  host,
   logging: console.log,
+  port: parseInt(dbPort),
 });
 
 sequelize.addModels(models);

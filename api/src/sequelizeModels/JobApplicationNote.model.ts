@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, AllowNull, ForeignKey, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, ForeignKey, Model, Table, Unique } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 import { Note } from './Note.model';
 

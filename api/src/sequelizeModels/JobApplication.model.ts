@@ -1,8 +1,8 @@
-import { Table, Model, DataType, Column, PrimaryKey, AllowNull, BelongsTo, HasOne, ForeignKey, AutoIncrement } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { JobPostingInfo } from './JobPostingInfo.model';
-import { User } from './User.model';
-import { Status } from './Status.model';
 import { Position } from './Position.model';
+import { Status } from './Status.model';
+import { User } from './User.model';
 
 interface IJobApplication {
   id: number;

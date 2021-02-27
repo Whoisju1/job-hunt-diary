@@ -26,7 +26,101 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "eqeqeq": [
+        "error"
+      ],
+      "max-classes-per-file": [
+        "error",
+        1
+      ],
+      "no-multi-spaces": [
+        "error",
+        {
+          "exceptions": {},
+          "ignoreEOLComments": false
+        }
+      ],
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowShortCircuit": true,
+          "allowTernary": true,
+          "allowTaggedTemplates": true
+        }
+      ],
+      "prefer-named-capture-group": [
+        "warn"
+      ],
+      "require-await": [
+        "error"
+      ],
+      "vars-on-top": [
+        "error"
+      ],
+      "arrow-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": true
+        }
+      ],
+      "no-const-assign": [
+        "error"
+      ],
+      "no-duplicate-imports": [
+        "error",
+        {
+          "includeExports": false
+        }
+      ],
+      "no-useless-computed-key": [
+        "error",
+        {
+          "enforceForClassMembers": false
+        }
+      ],
+      "no-useless-rename": [
+        "error",
+        null
+      ],
+      "no-var": [
+        "error"
+      ],
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+        }
+      ],
+      "prefer-destructuring": [
+        "warn"
+      ],
+      "prefer-reflect": [
+        "warn",
+        {
+          "exceptions": null
+        }
+      ],
+      "prefer-rest-params": [
+        "error"
+      ],
+      "prefer-template": [
+        "warn"
+      ],
+      "sort-imports": [
+        "error",
+        {
+          "ignoreCase": false,
+          "memberSyntaxSortOrder": null,
+          "ignoreDeclarationSort": false,
+          "ignoreMemberSort": false,
+          "allowSeparatedGroups": false
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

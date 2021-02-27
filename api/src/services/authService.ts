@@ -1,8 +1,8 @@
+import { User, UserInput } from '../types/graphql-types';
 import { IService } from './../types/services.d';
-import { UserInput, User } from '../types/graphql-types';
 import { User as UserModel } from '../sequelizeModels/User.model';
 
-interface IAuthService extends IService<User, UserInput> { }
+type IAuthService = IService<User, UserInput>
 
 export class AuthService implements IAuthService {
   delete!: (id: string) => Promise<User>;
@@ -10,7 +10,7 @@ export class AuthService implements IAuthService {
   get!: (id: string) => Promise<User>;
   getMany!: () => Promise<User>;
 
-  public create = async (item: UserInput) => {
+  public create = async (item: UserInput): Promise<User> => {
     const user = await (await UserModel
       .create(item))
       .save();

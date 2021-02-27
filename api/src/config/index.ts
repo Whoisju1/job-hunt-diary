@@ -30,29 +30,29 @@ interface IEnv {
 
 const config: IConfig<IEnv> =  {
   development: {
-    nodeEnv: NODE_ENV,
     dbHost,
-    dbPort,
-    dbPass,
-    dbUser,
     dbName,
-  },
-  test: {
+    dbPass,
+    dbPort,
+    dbUser,
     nodeEnv: NODE_ENV,
-    dbHost,
-    dbPort,
-    dbPass,
-    dbUser,
-    dbName,
   },
   production: {
-    nodeEnv: NODE_ENV,
     dbHost,
-    dbPort,
-    dbPass,
-    dbUser,
     dbName,
-  }
+    dbPass,
+    dbPort,
+    dbUser,
+    nodeEnv: NODE_ENV,
+  },
+  test: {
+    dbHost,
+    dbName,
+    dbPass,
+    dbPort,
+    dbUser,
+    nodeEnv: NODE_ENV,
+  },
 };
 
 export default config[NODE_ENV];

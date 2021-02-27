@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, AutoIncrement, AllowNull, ForeignKey, IsEmail } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, DataType, ForeignKey, IsEmail, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 interface ICompany {

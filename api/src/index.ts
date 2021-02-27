@@ -1,5 +1,5 @@
-import { server } from './server';
 import sequelize from './db';
+import { server } from './server';
 
 (async () => {
   try {

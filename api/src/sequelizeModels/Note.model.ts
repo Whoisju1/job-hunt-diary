@@ -1,4 +1,4 @@
-import { Table, Model, DataType, Column, PrimaryKey, AutoIncrement, AllowNull } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 interface INote {
   id: number;
