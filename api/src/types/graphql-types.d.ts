@@ -32,9 +32,10 @@ export type ListParams = {
 };
 
 export enum Operator {
-  Eq = 'EQ',
-  Gt = 'GT',
-  Lt = 'LT'
+  Eq = 'eq',
+  NotEq = 'not_eq',
+  Gt = 'gt',
+  Lt = 'lt'
 }
 
 export enum Order {
@@ -102,19 +103,21 @@ export type JobApplication = {
   dateCreated: Scalars['String'];
   dateUpdated?: Maybe<Scalars['String']>;
   dateApplied?: Maybe<Scalars['String']>;
-  compensation?: Maybe<Scalars['String']>;
-  requirements?: Maybe<Array<Maybe<Scalars['String']>>>;
-  source?: Maybe<Scalars['String']>;
+  jobPostingInfo?: Maybe<JobPostingInfo>;
   notes?: Maybe<Array<Maybe<Note>>>;
+  status: Scalars['String'];
   contacts?: Maybe<Array<Maybe<Contact>>>;
+};
+
+export type JobPostingInfo = {
+  __typename?: 'JobPostingInfo';
+  sorce?: Maybe<Scalars['String']>;
 };
 
 export type JobApplicationInput = {
   position?: Maybe<PositionInput>;
   company?: Maybe<CompanyInput>;
   dateApplied?: Maybe<Scalars['String']>;
-  compensation?: Maybe<Scalars['String']>;
-  requirements?: Maybe<Array<Maybe<Scalars['String']>>>;
   notes?: Maybe<Array<Maybe<NoteInput>>>;
   contacts?: Maybe<Array<Maybe<ContactInput>>>;
 };
@@ -195,9 +198,11 @@ export type Position = {
   name?: Maybe<Scalars['String']>;
   company?: Maybe<Scalars['String']>;
   notes?: Maybe<Array<Maybe<Note>>>;
-  stage?: Maybe<Scalars['String']>;
   requirements?: Maybe<Array<Maybe<Scalars['String']>>>;
   jobApplication?: Maybe<JobApplication>;
+  compensation?: Maybe<Scalars['String']>;
+  rating?: Maybe<Scalars['Float']>;
+  benefits?: Maybe<Scalars['String']>;
 };
 
 export type PositionInput = {
@@ -221,6 +226,7 @@ export type UserInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   username: Scalars['String'];
+  password: Scalars['String'];
   email: Scalars['String'];
   phone?: Maybe<Scalars['String']>;
 };
@@ -229,6 +235,8 @@ export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
 }
+
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -318,6 +326,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Mutation: ResolverTypeWrapper<{}>;
   JobApplication: ResolverTypeWrapper<JobApplication>;
+  JobPostingInfo: ResolverTypeWrapper<JobPostingInfo>;
   JobApplicationInput: JobApplicationInput;
   JobApplicationList: ResolverTypeWrapper<JobApplicationList>;
   Company: ResolverTypeWrapper<Company>;
@@ -328,6 +337,7 @@ export type ResolversTypes = {
   Note: ResolverTypeWrapper<Note>;
   NoteInput: NoteInput;
   Position: ResolverTypeWrapper<Position>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   PositionInput: PositionInput;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -346,6 +356,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'];
   Mutation: {};
   JobApplication: JobApplication;
+  JobPostingInfo: JobPostingInfo;
   JobApplicationInput: JobApplicationInput;
   JobApplicationList: JobApplicationList;
   Company: Company;
@@ -356,6 +367,7 @@ export type ResolversParentTypes = {
   Note: Note;
   NoteInput: NoteInput;
   Position: Position;
+  Float: Scalars['Float'];
   PositionInput: PositionInput;
   User: User;
   UserInput: UserInput;
@@ -395,11 +407,15 @@ export type JobApplicationResolvers<ContextType = any, ParentType extends Resolv
   dateCreated?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   dateUpdated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   dateApplied?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  compensation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  requirements?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  source?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  jobPostingInfo?: Resolver<Maybe<ResolversTypes['JobPostingInfo']>, ParentType, ContextType>;
   notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contacts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Contact']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JobPostingInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobPostingInfo'] = ResolversParentTypes['JobPostingInfo']> = {
+  sorce?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -455,9 +471,11 @@ export type PositionResolvers<ContextType = any, ParentType extends ResolversPar
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
-  stage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   requirements?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   jobApplication?: Resolver<Maybe<ResolversTypes['JobApplication']>, ParentType, ContextType>;
+  compensation?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  rating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  benefits?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -480,6 +498,7 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   JobApplication?: JobApplicationResolvers<ContextType>;
+  JobPostingInfo?: JobPostingInfoResolvers<ContextType>;
   JobApplicationList?: JobApplicationListResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   CompanyList?: CompanyListResolvers<ContextType>;

@@ -7,7 +7,7 @@
     "test": "npx jest",
     "test:watch": "npx jest --watch",
     "clean": "rimraf build",
-    "build": "npm run clean && babel src --out-dir build --extensions \".ts\" ",
+    "build": "npm run clean && babel src --out-dir build --extensions \".ts\"",
     "dev": "nodemon -L -e ts,json --watch src --exec \"babel-node src --extensions '.ts'\"",
     "start": "node build",
     "generate": "graphql-codegen --config codegen.yml",

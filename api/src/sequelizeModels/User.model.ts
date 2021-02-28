@@ -1,4 +1,4 @@
-import { AllowNull, AutoIncrement, Column, DataType, HasMany, IsEmail, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, DataType, HasMany, IsEmail, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
 @Table({
@@ -23,6 +23,8 @@ export class User extends Model {
   @Column(DataType.STRING)
   username!: string;
 
+  @AllowNull(false)
+  @Unique
   @IsEmail
   @Column(DataType.STRING)
   email!: string;
@@ -30,6 +32,8 @@ export class User extends Model {
   @HasMany(() => JobApplication, { onDelete: 'CASCADE' })
   jobApplications!: JobApplication[]
 
+  // TODO: Add validation for phone number
+  @Unique
   @Column(DataType.STRING)
   phone!: string;
 
