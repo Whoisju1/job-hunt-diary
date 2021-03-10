@@ -16,8 +16,10 @@ services:
       DATABASE_NAME: job_hunt_diary
     ports:
       - '4000:4000'
+      - '9229:9229'
     depends_on:
       - db
+      - phpmyadmin
   db:
     image: mysql
     restart: always
