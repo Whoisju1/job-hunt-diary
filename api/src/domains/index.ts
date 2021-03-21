@@ -1,12 +1,14 @@
-import { DocumentNode } from 'graphql/language';
-import * as jobApplication from './jobApplication';
 import * as company from './company';
 import * as contact from './contact';
+import * as jobApplication from './jobApplication';
 import * as note from './note';
 import * as position from './position';
 import * as user from './user';
-import shared from './shared';
+
+import { DocumentNode } from 'graphql/language';
+
 import root from './root';
+import shared from './shared';
 
 export const typeDefs: DocumentNode[] = [
   shared,
