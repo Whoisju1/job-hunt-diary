@@ -1,2 +1,3 @@
+jest.config.ts
 graphql-types.dts
 *.d.ts
