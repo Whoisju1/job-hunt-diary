@@ -9,8 +9,9 @@ describe('AuthService', () => {
   let mockedUserInput: UserInput;
   let hashedPass: string;
 
-  beforeAll(async () => {
-    await initializeDb();
+  beforeAll(() => initializeDb());
+
+  beforeEach(async (done) => {
     mockedUserInput = {
       email: faker.internet.email(),
       firstName: faker.name.firstName(),
@@ -21,6 +22,7 @@ describe('AuthService', () => {
     };
 
     hashedPass =  await bcrypt.hash(mockedUserInput.password, 10);
+    done();
   });
 
   describe('create property', () => {
