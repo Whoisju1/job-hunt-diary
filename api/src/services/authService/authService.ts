@@ -1,11 +1,10 @@
 import { User, UserInput } from '../../types/graphql-types';
-import { IService } from '../../types/services';
+// import { IService } from '../../types/services';
 import { User as UserModel } from '../../sequelizeModels/User.model';
 import bcrypt from 'bcrypt';
 
-type IAuthService = IService<User, UserInput>
-
-export class AuthService implements IAuthService {
+// type IAuthService = IService<User, UserInput>
+export class AuthService {
   delete!: (id: string) => Promise<User>;
   edit!: (item: UserInput) => Promise<User>;
   get!: (id: string) => Promise<User>;
