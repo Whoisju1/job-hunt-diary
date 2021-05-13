@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:unit": "npx jest --runInBand",
-    "test:unit:w": "npx jest --watch --runInBand",
+    "test:unit:w": "npx jest --watchAll --runInBand",
     "test-watch-debug": "node --inspect=0.0.0.0:9229 ./node_modules/jest/bin/jest.js --watchAll --runInBand",
     "clean": "rimraf build",
     "build": "npm run clean && babel src --out-dir build --extensions \".ts\"",
