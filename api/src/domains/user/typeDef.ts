@@ -8,6 +8,8 @@ export default gql`
     username: String
     email: String
     phone: String
+    updatedAt: String
+    createdAt: String
   }
 
   input UserInput {

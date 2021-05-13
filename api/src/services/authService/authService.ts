@@ -10,17 +10,13 @@ export class AuthService {
   get!: (id: string) => Promise<User>;
   getMany!: () => Promise<User>;
 
-  public static create = async (item: UserInput): Promise<User> => {
+  public static create = async (newUser: UserInput): Promise<User> => {
     // hash password with 10 salt rounds
-    const hashedPass = await bcrypt.hash(item.password, 10);
+    const hashedPass = await bcrypt.hash(newUser.password, 10);
     // remove the password property from item
-    Reflect.deleteProperty(item, 'password');
-    console.log('------------------------');
-    console.log({ item });
-    console.log('------------------------');
-    const user = await (await UserModel
-      .create({ ...item, hashedPass }))
-      .save();
-    return user as unknown as User;
+    Reflect.deleteProperty(newUser, 'password');
+    const createdUser = (await UserModel.create({ ...newUser, hashedPass })).toJSON();
+
+    return createdUser as unknown as User;
   }
 }

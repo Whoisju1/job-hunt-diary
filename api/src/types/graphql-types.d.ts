@@ -15,119 +15,10 @@ export type Scalars = {
 };
 
 
-export type IList = {
-  nextPageOffset: Scalars['Int'];
-  moreAvailable: Scalars['Boolean'];
-};
-
-export type ListParams = {
-  field: Scalars['String'];
-  order?: Maybe<Order>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  /** When 'GetAll' is true 'limit' and 'start' are ignored and all the items are retrieved. */
-  operator?: Maybe<Operator>;
-  getAll?: Maybe<Scalars['Boolean']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-export enum Operator {
-  Eq = 'eq',
-  NotEq = 'not_eq',
-  Gt = 'gt',
-  Lt = 'lt'
+export enum CacheControlScope {
+  Public = 'PUBLIC',
+  Private = 'PRIVATE'
 }
-
-export enum Order {
-  Asc = 'ASC',
-  Dsc = 'DSC'
-}
-
-export type Query = {
-  __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
-  getJobApplications: JobApplicationList;
-  getJobApplication: JobApplication;
-  getCompanies: CompanyList;
-  getUser: User;
-};
-
-
-export type QueryGetJobApplicationsArgs = {
-  listParams?: Maybe<ListParams>;
-};
-
-
-export type QueryGetJobApplicationArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryGetCompaniesArgs = {
-  params?: Maybe<ListParams>;
-};
-
-
-export type QueryGetUserArgs = {
-  id: Scalars['ID'];
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  Hello?: Maybe<Scalars['String']>;
-  editJobApplication: JobApplication;
-  addJobApplication: JobApplication;
-  createUser: User;
-};
-
-
-export type MutationEditJobApplicationArgs = {
-  jobApplication: JobApplicationInput;
-};
-
-
-export type MutationAddJobApplicationArgs = {
-  jobApplication: JobApplicationInput;
-};
-
-
-export type MutationCreateUserArgs = {
-  input: UserInput;
-};
-
-export type JobApplication = {
-  __typename?: 'JobApplication';
-  id: Scalars['ID'];
-  position: Position;
-  company: Company;
-  dateCreated: Scalars['String'];
-  dateUpdated?: Maybe<Scalars['String']>;
-  dateApplied?: Maybe<Scalars['String']>;
-  jobPostingInfo?: Maybe<JobPostingInfo>;
-  notes?: Maybe<Array<Maybe<Note>>>;
-  status: Scalars['String'];
-  contacts?: Maybe<Array<Maybe<Contact>>>;
-};
-
-export type JobPostingInfo = {
-  __typename?: 'JobPostingInfo';
-  sorce?: Maybe<Scalars['String']>;
-};
-
-export type JobApplicationInput = {
-  position?: Maybe<PositionInput>;
-  company?: Maybe<CompanyInput>;
-  dateApplied?: Maybe<Scalars['String']>;
-  notes?: Maybe<Array<Maybe<NoteInput>>>;
-  contacts?: Maybe<Array<Maybe<ContactInput>>>;
-};
-
-export type JobApplicationList = IList & {
-  __typename?: 'JobApplicationList';
-  data: Array<Maybe<JobApplication>>;
-  nextPageOffset: Scalars['Int'];
-  moreAvailable: Scalars['Boolean'];
-};
 
 export type Company = {
   __typename?: 'Company';
@@ -179,6 +70,79 @@ export type ContactInput = {
   note?: Maybe<NoteInput>;
 };
 
+export type IList = {
+  nextPageOffset: Scalars['Int'];
+  moreAvailable: Scalars['Boolean'];
+};
+
+export type JobApplication = {
+  __typename?: 'JobApplication';
+  id: Scalars['ID'];
+  position: Position;
+  company: Company;
+  dateCreated: Scalars['String'];
+  dateUpdated?: Maybe<Scalars['String']>;
+  dateApplied?: Maybe<Scalars['String']>;
+  jobPostingInfo?: Maybe<JobPostingInfo>;
+  notes?: Maybe<Array<Maybe<Note>>>;
+  status: Scalars['String'];
+  contacts?: Maybe<Array<Maybe<Contact>>>;
+};
+
+export type JobApplicationInput = {
+  position?: Maybe<PositionInput>;
+  company?: Maybe<CompanyInput>;
+  dateApplied?: Maybe<Scalars['String']>;
+  notes?: Maybe<Array<Maybe<NoteInput>>>;
+  contacts?: Maybe<Array<Maybe<ContactInput>>>;
+};
+
+export type JobApplicationList = IList & {
+  __typename?: 'JobApplicationList';
+  data: Array<Maybe<JobApplication>>;
+  nextPageOffset: Scalars['Int'];
+  moreAvailable: Scalars['Boolean'];
+};
+
+export type JobPostingInfo = {
+  __typename?: 'JobPostingInfo';
+  sorce?: Maybe<Scalars['String']>;
+};
+
+export type ListParams = {
+  field: Scalars['String'];
+  order?: Maybe<Order>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  /** When 'GetAll' is true 'limit' and 'start' are ignored and all the items are retrieved. */
+  operator?: Maybe<Operator>;
+  getAll?: Maybe<Scalars['Boolean']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  Hello?: Maybe<Scalars['String']>;
+  editJobApplication: JobApplication;
+  addJobApplication: JobApplication;
+  createUser: User;
+};
+
+
+export type MutationEditJobApplicationArgs = {
+  jobApplication: JobApplicationInput;
+};
+
+
+export type MutationAddJobApplicationArgs = {
+  jobApplication: JobApplicationInput;
+};
+
+
+export type MutationCreateUserArgs = {
+  input: UserInput;
+};
+
 export type Note = {
   __typename?: 'Note';
   title?: Maybe<Scalars['String']>;
@@ -191,6 +155,18 @@ export type NoteInput = {
   title?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
 };
+
+export enum Operator {
+  Eq = 'eq',
+  NotEq = 'not_eq',
+  Gt = 'gt',
+  Lt = 'lt'
+}
+
+export enum Order {
+  Asc = 'ASC',
+  Dsc = 'DSC'
+}
 
 export type Position = {
   __typename?: 'Position';
@@ -212,6 +188,36 @@ export type PositionInput = {
   requirements?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type Query = {
+  __typename?: 'Query';
+  hello?: Maybe<Scalars['String']>;
+  getJobApplications: JobApplicationList;
+  getJobApplication: JobApplication;
+  getCompanies: CompanyList;
+  getUser: User;
+};
+
+
+export type QueryGetJobApplicationsArgs = {
+  listParams?: Maybe<ListParams>;
+};
+
+
+export type QueryGetJobApplicationArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGetCompaniesArgs = {
+  params?: Maybe<ListParams>;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
@@ -220,6 +226,8 @@ export type User = {
   username?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
 };
 
 export type UserInput = {
@@ -230,12 +238,6 @@ export type UserInput = {
   email: Scalars['String'];
   phone?: Maybe<Scalars['String']>;
 };
-
-export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
-}
-
 
 
 
@@ -315,116 +317,69 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  IList: ResolversTypes['JobApplicationList'] | ResolversTypes['CompanyList'];
-  Int: ResolverTypeWrapper<Scalars['Int']>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  ListParams: ListParams;
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Operator: Operator;
-  Order: Order;
-  Query: ResolverTypeWrapper<{}>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
-  Mutation: ResolverTypeWrapper<{}>;
-  JobApplication: ResolverTypeWrapper<JobApplication>;
-  JobPostingInfo: ResolverTypeWrapper<JobPostingInfo>;
-  JobApplicationInput: JobApplicationInput;
-  JobApplicationList: ResolverTypeWrapper<JobApplicationList>;
+  CacheControlScope: CacheControlScope;
   Company: ResolverTypeWrapper<Company>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   CompanyInput: CompanyInput;
   CompanyList: ResolverTypeWrapper<CompanyList>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Contact: ResolverTypeWrapper<Contact>;
   ContactInput: ContactInput;
+  IList: ResolversTypes['CompanyList'] | ResolversTypes['JobApplicationList'];
+  JobApplication: ResolverTypeWrapper<JobApplication>;
+  JobApplicationInput: JobApplicationInput;
+  JobApplicationList: ResolverTypeWrapper<JobApplicationList>;
+  JobPostingInfo: ResolverTypeWrapper<JobPostingInfo>;
+  ListParams: ListParams;
+  Mutation: ResolverTypeWrapper<{}>;
   Note: ResolverTypeWrapper<Note>;
   NoteInput: NoteInput;
+  Operator: Operator;
+  Order: Order;
   Position: ResolverTypeWrapper<Position>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   PositionInput: PositionInput;
+  Query: ResolverTypeWrapper<{}>;
+  Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
-  CacheControlScope: CacheControlScope;
-  Upload: ResolverTypeWrapper<Scalars['Upload']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  IList: ResolversParentTypes['JobApplicationList'] | ResolversParentTypes['CompanyList'];
-  Int: Scalars['Int'];
-  Boolean: Scalars['Boolean'];
-  ListParams: ListParams;
-  String: Scalars['String'];
-  Query: {};
-  ID: Scalars['ID'];
-  Mutation: {};
-  JobApplication: JobApplication;
-  JobPostingInfo: JobPostingInfo;
-  JobApplicationInput: JobApplicationInput;
-  JobApplicationList: JobApplicationList;
   Company: Company;
+  ID: Scalars['ID'];
+  String: Scalars['String'];
   CompanyInput: CompanyInput;
   CompanyList: CompanyList;
+  Int: Scalars['Int'];
+  Boolean: Scalars['Boolean'];
   Contact: Contact;
   ContactInput: ContactInput;
+  IList: ResolversParentTypes['CompanyList'] | ResolversParentTypes['JobApplicationList'];
+  JobApplication: JobApplication;
+  JobApplicationInput: JobApplicationInput;
+  JobApplicationList: JobApplicationList;
+  JobPostingInfo: JobPostingInfo;
+  ListParams: ListParams;
+  Mutation: {};
   Note: Note;
   NoteInput: NoteInput;
   Position: Position;
   Float: Scalars['Float'];
   PositionInput: PositionInput;
+  Query: {};
+  Upload: Scalars['Upload'];
   User: User;
   UserInput: UserInput;
-  Upload: Scalars['Upload'];
 };
 
 export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
   scope?: Maybe<CacheControlScope>; };
 
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
-export type IListResolvers<ContextType = any, ParentType extends ResolversParentTypes['IList'] = ResolversParentTypes['IList']> = {
-  __resolveType: TypeResolveFn<'JobApplicationList' | 'CompanyList', ParentType, ContextType>;
-  nextPageOffset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  moreAvailable?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-};
-
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  getJobApplications?: Resolver<ResolversTypes['JobApplicationList'], ParentType, ContextType, RequireFields<QueryGetJobApplicationsArgs, never>>;
-  getJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<QueryGetJobApplicationArgs, 'id'>>;
-  getCompanies?: Resolver<ResolversTypes['CompanyList'], ParentType, ContextType, RequireFields<QueryGetCompaniesArgs, never>>;
-  getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
-};
-
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  Hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  editJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationEditJobApplicationArgs, 'jobApplication'>>;
-  addJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationAddJobApplicationArgs, 'jobApplication'>>;
-  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'input'>>;
-};
-
-export type JobApplicationResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobApplication'] = ResolversParentTypes['JobApplication']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
-  company?: Resolver<ResolversTypes['Company'], ParentType, ContextType>;
-  dateCreated?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  dateUpdated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  dateApplied?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  jobPostingInfo?: Resolver<Maybe<ResolversTypes['JobPostingInfo']>, ParentType, ContextType>;
-  notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  contacts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Contact']>>>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type JobPostingInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobPostingInfo'] = ResolversParentTypes['JobPostingInfo']> = {
-  sorce?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type JobApplicationListResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobApplicationList'] = ResolversParentTypes['JobApplicationList']> = {
-  data?: Resolver<Array<Maybe<ResolversTypes['JobApplication']>>, ParentType, ContextType>;
-  nextPageOffset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  moreAvailable?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
 
 export type CompanyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Company'] = ResolversParentTypes['Company']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -458,6 +413,45 @@ export type ContactResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type IListResolvers<ContextType = any, ParentType extends ResolversParentTypes['IList'] = ResolversParentTypes['IList']> = {
+  __resolveType: TypeResolveFn<'CompanyList' | 'JobApplicationList', ParentType, ContextType>;
+  nextPageOffset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  moreAvailable?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+};
+
+export type JobApplicationResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobApplication'] = ResolversParentTypes['JobApplication']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
+  company?: Resolver<ResolversTypes['Company'], ParentType, ContextType>;
+  dateCreated?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  dateUpdated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dateApplied?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  jobPostingInfo?: Resolver<Maybe<ResolversTypes['JobPostingInfo']>, ParentType, ContextType>;
+  notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  contacts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Contact']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JobApplicationListResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobApplicationList'] = ResolversParentTypes['JobApplicationList']> = {
+  data?: Resolver<Array<Maybe<ResolversTypes['JobApplication']>>, ParentType, ContextType>;
+  nextPageOffset?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  moreAvailable?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JobPostingInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobPostingInfo'] = ResolversParentTypes['JobPostingInfo']> = {
+  sorce?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  Hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  editJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationEditJobApplicationArgs, 'jobApplication'>>;
+  addJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationAddJobApplicationArgs, 'jobApplication'>>;
+  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'input'>>;
+};
+
 export type NoteResolvers<ContextType = any, ParentType extends ResolversParentTypes['Note'] = ResolversParentTypes['Note']> = {
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   body?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -479,6 +473,18 @@ export type PositionResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  getJobApplications?: Resolver<ResolversTypes['JobApplicationList'], ParentType, ContextType, RequireFields<QueryGetJobApplicationsArgs, never>>;
+  getJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<QueryGetJobApplicationArgs, 'id'>>;
+  getCompanies?: Resolver<ResolversTypes['CompanyList'], ParentType, ContextType, RequireFields<QueryGetCompaniesArgs, never>>;
+  getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
+};
+
+export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
+  name: 'Upload';
+}
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -486,27 +492,25 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
-  name: 'Upload';
-}
-
 export type Resolvers<ContextType = any> = {
-  IList?: IListResolvers<ContextType>;
-  Query?: QueryResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
-  JobApplication?: JobApplicationResolvers<ContextType>;
-  JobPostingInfo?: JobPostingInfoResolvers<ContextType>;
-  JobApplicationList?: JobApplicationListResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   CompanyList?: CompanyListResolvers<ContextType>;
   Contact?: ContactResolvers<ContextType>;
+  IList?: IListResolvers<ContextType>;
+  JobApplication?: JobApplicationResolvers<ContextType>;
+  JobApplicationList?: JobApplicationListResolvers<ContextType>;
+  JobPostingInfo?: JobPostingInfoResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Note?: NoteResolvers<ContextType>;
   Position?: PositionResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
   Upload?: GraphQLScalarType;
+  User?: UserResolvers<ContextType>;
 };
 
 
