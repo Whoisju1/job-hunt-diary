@@ -15,13 +15,15 @@ describe('AuthService', () => {
     phone: faker.phone.phoneNumber(),
     username: faker.internet.userName(),
   };
+
+  const createUser = async (user = mockedUserInput) => await AuthService.create(user);
   
   describe('create method', () => {
     let newUser: User;
   
     beforeAll(() => initializeDb());
     beforeEach(async done => {
-      newUser = await AuthService.create(mockedUserInput);
+      newUser = await createUser();
       done();
     });
 
@@ -55,6 +57,29 @@ describe('AuthService', () => {
     it('should deleteUser', async () => {
       const numberOfDeletedItems = await AuthService.delete(createdUser.id);
       expect(numberOfDeletedItems).toBe(1);
+    });
+  });
+
+  describe('edit method', () => {
+    let existingUser: User;
+    beforeEach(async (done: () => void) => {
+      // create user for editing
+      existingUser = await createUser();
+      done();
+    });
+    it('should exist', () => {
+      expect(AuthService).toHaveProperty('edit');
+    });
+
+    it('should modify existing user', async () => {
+      const modifications = { username: 'edided username' };
+      const editedUser = await AuthService.edit(existingUser.id, modifications);
+      expect(editedUser.username).toBe(modifications.username);
+    });
+
+    afterEach(async () => {
+      const { id } = existingUser;
+      return await UserModel.destroy({ where: { id }});
     });
   });
 });
