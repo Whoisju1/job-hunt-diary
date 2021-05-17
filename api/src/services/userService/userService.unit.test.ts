@@ -1,22 +1,22 @@
 /* eslint-disable max-lines-per-function */
 import 'regenerator-runtime/runtime';
-import { User, UserInput } from './../../types/graphql-types.d';
-import { AuthService } from './';
+import { User, UserInput } from '../../types/graphql-types';
 import { User as UserModel } from '../../sequelizeModels/User.model';
+import { UserService } from '.';
 import faker from 'faker';
 import { initializeDb } from '../../db';
 
-describe('AuthService', () => {
-  const mockedUserInput: UserInput = {
+describe('UserService', () => {
+  const createMockUser = (): UserInput => ({
     email: faker.internet.email(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     password: faker.internet.password(),
     phone: faker.phone.phoneNumber(),
     username: faker.internet.userName(),
-  };
+  });
 
-  const createUser = async (user = mockedUserInput) => await AuthService.create(user);
+  const createUser = async (user = createMockUser()) => await UserService.create(user);
   
   describe('create method', () => {
     let newUser: User;
@@ -29,7 +29,7 @@ describe('AuthService', () => {
 
     it('should return a new User', () => {
       const expectedReturnValue = {
-        ...mockedUserInput,
+        ...newUser,
       };
       Reflect.deleteProperty(expectedReturnValue, 'password');
 
@@ -45,17 +45,17 @@ describe('AuthService', () => {
   describe('delete method', () => {
     let createdUser: User; 
     beforeAll(async done => {
-      createdUser = await AuthService.create(mockedUserInput);
+      createdUser = await UserService.create(createMockUser());
       done();
     });
 
     it('should be defined', () => {
-      expect(AuthService).toHaveProperty('delete');
-      expect(AuthService.delete).toBeDefined();
+      expect(UserService).toHaveProperty('delete');
+      expect(UserService.delete).toBeDefined();
     });
 
     it('should deleteUser', async () => {
-      const numberOfDeletedItems = await AuthService.delete(createdUser.id);
+      const numberOfDeletedItems = await UserService.delete(createdUser.id);
       expect(numberOfDeletedItems).toBe(1);
     });
   });
@@ -68,18 +68,42 @@ describe('AuthService', () => {
       done();
     });
     it('should exist', () => {
-      expect(AuthService).toHaveProperty('edit');
+      expect(UserService).toHaveProperty('edit');
     });
 
     it('should modify existing user', async () => {
       const modifications = { username: 'edided username' };
-      const editedUser = await AuthService.edit(existingUser.id, modifications);
+      const editedUser = await UserService.edit(existingUser.id, modifications);
       expect(editedUser.username).toBe(modifications.username);
     });
 
     afterEach(async () => {
       const { id } = existingUser;
       return await UserModel.destroy({ where: { id }});
+    });
+  });
+
+  describe('getOne method', () => {
+    let existingUser: User;
+    beforeEach(async () => {
+      existingUser = await createUser();
+    });
+
+    afterEach(async () => {
+      const { id } = existingUser;
+      await UserModel.destroy({ where: { id }});
+    });
+
+    it('should be defined', () => {
+      expect(UserService).toHaveProperty('getOne');
+      expect(UserService.getOne).toBeDefined;  
+    });
+
+    it('should get one user', async () => {
+      const foundUser = await UserService.getOne(existingUser.id);
+      Reflect.deleteProperty(existingUser, 'password');
+      expect(foundUser).toMatchObject({ ...existingUser, createdAt: expect.any(Date), updatedAt: expect.any(Date) });
+      expect(foundUser).toHaveProperty('hashedPass');
     });
   });
 });

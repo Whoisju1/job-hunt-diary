@@ -3,8 +3,7 @@ import { User, UserInput } from '../../types/graphql-types';
 import { User as UserModel } from '../../sequelizeModels/User.model';
 import bcrypt from 'bcrypt';
 
-// type IAuthService = IService<User, UserInput>
-export class AuthService {
+export class UserService {
   public static delete  = async (id: string): Promise<number> => {
     const numOfRowsDelted = await UserModel.destroy({ where: { id } });
     return numOfRowsDelted;
@@ -18,8 +17,11 @@ export class AuthService {
     return editedUser.toJSON() as User;
   }
 
-  get!: (id: string) => Promise<User>;
-  getMany!: () => Promise<User>;
+  static getOne = async (id: string): Promise<User> => {
+    const foundUser = await UserModel.findOne({ where: { id } });
+    if (!foundUser) throw new Error('User not found.');
+    return foundUser.toJSON() as User;
+  }
 
   public static create = async (user: UserInput): Promise<User> => {
     const { password, ...newUser } = user;
