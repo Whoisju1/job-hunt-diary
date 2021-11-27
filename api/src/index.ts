@@ -8,7 +8,7 @@ import { server } from './server';
     await initializeDb();
     const { url } = await server.listen();
     console.log('\x1b[32m', `🚀 Server ready at ${url}`);
-  } catch (error) {
+  } catch (error: any) {
     console.error('\x1b[33m', '---------- ERROR -----------');
     console.error('\x1b[33m', error.message);
   }
