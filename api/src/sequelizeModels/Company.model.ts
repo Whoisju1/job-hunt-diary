@@ -2,7 +2,6 @@ import { AllowNull, AutoIncrement, Column, DataType, ForeignKey, IsEmail, Model,
 import { JobApplication } from './JobApplication.model';
 
 interface ICompany {
-  id: number;
   name: string;
   location: string;
   phone: string;
@@ -12,12 +11,6 @@ interface ICompany {
 
 @Table
 export class Company extends Model implements ICompany {
-  @PrimaryKey
-  @AllowNull(false)
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id!: number;
-
   @AllowNull(false)
   @Column(DataType.STRING)
   name!: string;

@@ -2,18 +2,12 @@ import { AllowNull, AutoIncrement, Column, DataType, ForeignKey, Model, PrimaryK
 import { JobApplication } from './JobApplication.model';
 
 interface IJobPostingInfo {
-  id: number;
   source: string;
   jobApplicationId: number;
 }
 
 @Table
 export class JobPostingInfo extends Model implements IJobPostingInfo {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id!: number;
-
   @AllowNull(false)
   @Column(DataType.STRING)
   source!: string;

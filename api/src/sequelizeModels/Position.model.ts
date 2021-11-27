@@ -3,7 +3,6 @@ import { JobApplication } from './JobApplication.model';
 import { PositionRequirement } from './PositionRequirement.model';
 
 interface IPosition {
-  id: number;
   name: string;
   compensation: string;
   rating: number;
@@ -14,11 +13,6 @@ interface IPosition {
 
 @Table
 export class Position extends Model implements IPosition {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id!: number;
-
   @AllowNull(false)
   @Column(DataType.STRING)
   name!: string;
