@@ -4,7 +4,6 @@ import { User, UserInput } from '../../types/graphql-types';
 import { User as UserModel } from '../../sequelizeModels/User.model';
 import bcrypt from 'bcrypt';
 import { injectable } from 'inversify';
-// import { IService } from '../../types/services';
 
 @injectable()
 export class UserService implements IUserService {

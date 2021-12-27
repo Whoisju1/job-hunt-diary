@@ -4,7 +4,7 @@ import { User, UserInput } from '../../types/graphql-types';
 import { User as UserModel } from '../../sequelizeModels/User.model';
 import faker from 'faker';
 import { initializeDb } from '../../db';
-import { userService } from '../../container';
+import { userService } from '@container';
 
 describe('UserService', () => {
   const createMockUser = (): UserInput => ({
