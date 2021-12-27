@@ -13,7 +13,7 @@ export class UserService implements IUserService {
     return numOfRowsDeleted;
   }
 
-  edit = async (id: string, modifications: Partial<UserInput>): Promise<User> => {
+  public edit = async (id: string, modifications: Partial<UserInput>): Promise<User> => {
     const [quantityEdited] = await UserModel.update(modifications, { where: { id }});
     if (!quantityEdited) throw new Error('User not found.');
     const editedUser = await UserModel.findOne({ where: { id} });
