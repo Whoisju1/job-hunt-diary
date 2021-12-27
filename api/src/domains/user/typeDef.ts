@@ -23,6 +23,7 @@ export default gql`
 
   extend type Mutation {
     createUser(input: UserInput!): User!
+    deleteUser(id: ID!): Boolean!
   }
 
   extend type Query {

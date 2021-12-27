@@ -119,6 +119,7 @@ export type Mutation = {
   Hello?: Maybe<Scalars['String']>;
   addJobApplication: JobApplication;
   createUser: User;
+  deleteUser: Scalars['Boolean'];
   editJobApplication: JobApplication;
 };
 
@@ -130,6 +131,11 @@ export type MutationAddJobApplicationArgs = {
 
 export type MutationCreateUserArgs = {
   input: UserInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -425,6 +431,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   Hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationAddJobApplicationArgs, 'jobApplication'>>;
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'input'>>;
+  deleteUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   editJobApplication?: Resolver<ResolversTypes['JobApplication'], ParentType, ContextType, RequireFields<MutationEditJobApplicationArgs, 'jobApplication'>>;
 };
 
