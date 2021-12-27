@@ -1,3 +1,2 @@
 jest.config.ts
 graphql-types.d.ts
-*.d.ts

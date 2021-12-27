@@ -1,11 +1,20 @@
 import { AllowNull, Column, DataType, HasMany, IsEmail, Model, Table, Unique } from 'sequelize-typescript';
 import { JobApplication } from './JobApplication.model';
 
+export interface IUser {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  phone: string;
+  hashedPass: string;
+}
+
 @Table({
   createdAt: true,
   updatedAt: true,
 })
-export class User extends Model {
+export class User extends Model implements IUser {
   @AllowNull(false)
   @Column(DataType.STRING)
   firstName!: string;

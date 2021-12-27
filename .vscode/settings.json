@@ -1,5 +1,9 @@
 {
   "cSpell.words": [
-    "codegen"
-  ]
+    "codegen",
+    "inversify"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
 }

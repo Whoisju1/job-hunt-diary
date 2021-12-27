@@ -1,15 +1,10 @@
-import { AllowNull, AutoIncrement, Column, DataType, IsEmail, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, IsEmail, Model, Table } from 'sequelize-typescript';
 
 @Table({
   createdAt: true,
   updatedAt: true,
 })
 export class Contact extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id!: number;
-
 @AllowNull(false)
   @Column(DataType.STRING)
   firstName!: string;
