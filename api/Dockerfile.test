@@ -1,4 +1,10 @@
-FROM node:14-alpine
+FROM node:17.2-alpine3.14
+
+ARG db_host
+
+ARG db_port
+
+ENV NODE_NAME=test
 
 WORKDIR /api
 
@@ -10,4 +16,8 @@ COPY ./package.json ./package.json
 
 RUN npm i
 
-CMD ["npm", "run", "test:unit"]
+RUN chmod 777 ./scripts/wait-for-it.bash
+
+RUN ./scripts/wait-for-it.bash -t 0 -h ${db_host} -p ${db_port} -- echo "database ready."
+
+CMD ["npm", "run", "dev"]

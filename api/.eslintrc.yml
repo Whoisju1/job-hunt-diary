@@ -44,17 +44,17 @@ rules:
     - warn
   max-params:
     - warn
-  sort-imports:
-    - error
-  sort-keys:
-    - error
-  sort-vars:
-    - error
-    - ignoreCase: false
+  # sort-imports:
+  #   - error
+  # sort-keys:
+  #   - error
+  # sort-vars:
+  #   - error
+  #   - ignoreCase: false
   no-var:
     - error
 
-  # following rules disabled so as not report incorrect errors because of typscript rules
+  # following rules disabled so as not report incorrect errors because of typescript rules
   comma-dangle: "off"
   default-param-last: "off"
   no-duplicate-imports: "off"

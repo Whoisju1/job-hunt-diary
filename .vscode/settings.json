@@ -1,7 +1,10 @@
 {
   "cSpell.words": [
     "codegen",
-    "inversify"
+    "IIFE",
+    "inversify",
+    "linebreak",
+    "parens"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true

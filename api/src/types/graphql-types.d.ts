@@ -27,7 +27,7 @@ export type Company = {
 
 export type CompanyInput = {
   email?: InputMaybe<Scalars['String']>;
-  insideContact?: InputMaybe<Array<InputMaybe<ContactInput>>>;
+  insideContacts?: InputMaybe<Array<InputMaybe<ContactInput>>>;
   location?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   notes?: InputMaybe<Array<InputMaybe<NoteInput>>>;
@@ -80,7 +80,7 @@ export type JobApplication = {
   jobPostingInfo?: Maybe<JobPostingInfo>;
   notes?: Maybe<Array<Maybe<Note>>>;
   position: Position;
-  status: Scalars['String'];
+  status: Status;
 };
 
 export type JobApplicationInput = {
@@ -89,6 +89,7 @@ export type JobApplicationInput = {
   dateApplied?: InputMaybe<Scalars['String']>;
   notes?: InputMaybe<Array<InputMaybe<NoteInput>>>;
   position?: InputMaybe<PositionInput>;
+  status: Scalars['String'];
 };
 
 export type JobApplicationList = IList & {
@@ -100,7 +101,7 @@ export type JobApplicationList = IList & {
 
 export type JobPostingInfo = {
   __typename?: 'JobPostingInfo';
-  sorce?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
 };
 
 export type ListParams = {
@@ -217,6 +218,13 @@ export type QueryGetUserArgs = {
   id: Scalars['ID'];
 };
 
+export type Status = {
+  __typename?: 'Status';
+  displayName: Scalars['String'];
+  id: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
   createdAt?: Maybe<Scalars['String']>;
@@ -330,6 +338,7 @@ export type ResolversTypes = {
   Position: ResolverTypeWrapper<Position>;
   PositionInput: PositionInput;
   Query: ResolverTypeWrapper<{}>;
+  Status: ResolverTypeWrapper<Status>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -358,6 +367,7 @@ export type ResolversParentTypes = {
   Position: Position;
   PositionInput: PositionInput;
   Query: {};
+  Status: Status;
   String: Scalars['String'];
   User: User;
   UserInput: UserInput;
@@ -411,7 +421,7 @@ export type JobApplicationResolvers<ContextType = any, ParentType extends Resolv
   jobPostingInfo?: Resolver<Maybe<ResolversTypes['JobPostingInfo']>, ParentType, ContextType>;
   notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Note']>>>, ParentType, ContextType>;
   position?: Resolver<ResolversTypes['Position'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -423,7 +433,7 @@ export type JobApplicationListResolvers<ContextType = any, ParentType extends Re
 };
 
 export type JobPostingInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['JobPostingInfo'] = ResolversParentTypes['JobPostingInfo']> = {
-  sorce?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  source?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -464,6 +474,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
+export type StatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['Status'] = ResolversParentTypes['Status']> = {
+  displayName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   createdAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -488,6 +505,7 @@ export type Resolvers<ContextType = any> = {
   Note?: NoteResolvers<ContextType>;
   Position?: PositionResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Status?: StatusResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 

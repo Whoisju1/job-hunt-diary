@@ -17,7 +17,7 @@ export default gql`
     notes: [NoteInput]
     phone: String
     email: String
-    insideContact: [ContactInput]
+    insideContacts: [ContactInput]
   }
 
   type CompanyList implements IList {

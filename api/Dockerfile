@@ -1,4 +1,4 @@
-FROM node:14.13.1
+FROM node:17.2-alpine3.14
 
 WORKDIR /api
 

@@ -10,12 +10,12 @@ export default gql`
     dateApplied: String
     jobPostingInfo: JobPostingInfo
     notes: [Note]
-    status: String!
+    status: Status!
     contacts: [Contact]
   }
 
   type JobPostingInfo {
-    sorce: String
+    source: String
   }
 
   input JobApplicationInput {
@@ -24,6 +24,13 @@ export default gql`
     dateApplied: String
     notes: [NoteInput]
     contacts: [ContactInput]
+    status: String!
+  }
+
+  type Status {
+    id: String!
+    name: String!
+    displayName: String!
   }
 
   type JobApplicationList implements IList {

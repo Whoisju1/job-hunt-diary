@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
-import config from '../config';
-import models from '../sequelizeModels';
+import config from '#config';
+// import logger from '#logger';
+import models from '#models';
 
 const {
   dbHost: host,
@@ -13,7 +14,8 @@ const {
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   dialect: 'mysql',
   host,
-  logging: console.log,
+  // logging: config.nodeEnv !== 'production' ? (message: string) => logger.log('info', message) : false,
+  logging: false,
   port: parseInt(dbPort),
 });
 
@@ -23,9 +25,7 @@ export const initializeDb = async (): Promise<void> => {
   await sequelize.authenticate();
   await sequelize.sync({
     force: config.nodeEnv === 'test',
-    logging: false,
   });
-  console.log('\x1b[32m', 'Database connection has been established successfully.');
 };
 
 export default sequelize;

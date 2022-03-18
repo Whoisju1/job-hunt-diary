@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { IUserService, ReturnedUser } from '../../interfaces';
 import { User, UserInput } from '../../types/graphql-types';
-import { User as UserModel } from '../../sequelizeModels/User.model';
+import { User as UserModel } from '#models';
 import bcrypt from 'bcrypt';
 import { injectable } from 'inversify';
 

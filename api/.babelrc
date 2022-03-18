@@ -8,14 +8,17 @@
       "@babel/plugin-proposal-decorators",
       { "legacy": true }
     ],
+    "@babel/plugin-transform-parameters",
     [
       "module-resolver",
       {
         "alias": {
-          "src/*": "./src",
-          "@container/*": "./src/container/*",
-          "@container": "./src/container",
-          "@services/*": "./src/services/*"
+          "#container": "./src/container",
+          "#models": "./src/models",
+          "#services": "./src/services",
+          "#config": "./src/config",
+          "#logger": "./src/logger",
+          "src": "./src"
         }
       }
     ],

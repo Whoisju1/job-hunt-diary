@@ -1,10 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import 'regenerator-runtime/runtime';
 import { User, UserInput } from '../../types/graphql-types';
-import { User as UserModel } from '../../sequelizeModels/User.model';
+import { User as UserModel } from '../../models';
 import faker from 'faker';
 import { initializeDb } from '../../db';
-import { userService } from '@container';
+import { userService } from 'src/container';
 
 describe('UserService', () => {
   const createMockUser = (): UserInput => ({
@@ -38,11 +38,13 @@ describe('UserService', () => {
       expect(newUser).toMatchObject({ ...expectedReturnValue });
     });
 
-    afterAll(() => UserModel.destroy({ where: { id: newUser.id }}));
+    afterEach(async () => {
+      await UserModel.destroy({ where: { id: newUser.id }});
+    });
   });
 
   describe('delete method', () => {
-    let createdUser: User; 
+    let createdUser: User;
     beforeAll(async () => {
       createdUser = await userService.create(createMockUser());
     });
@@ -93,7 +95,7 @@ describe('UserService', () => {
 
     it('should be defined', () => {
       expect(userService).toHaveProperty('getOne');
-      expect(userService.getOne).toBeDefined;  
+      expect(userService.getOne).toBeDefined;
     });
 
     it('should get one user', async () => {

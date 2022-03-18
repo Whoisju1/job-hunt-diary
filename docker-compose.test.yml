@@ -1,18 +1,20 @@
 version: '3.8'
 services:
   api-test:
-    container_name: job_hunt_diary-api-test
     build:
       context: ./api
       dockerfile: Dockerfile.test
-    command: npm run test-watch-debug
+      args:
+        db_host: db-test
+        db_port: 3306
+    # command: "./scripts/wait-for-it.sh -t 0 -h db-test -p 3306 -- npm run dev"
     volumes:
       - ./api:/api
       - /api/node_modules
     environment:
       NODE_ENV: test
       DATABASE_HOSTNAME: db-test
-      DATABASE_PORT: '3307'
+      DATABASE_PORT: '3306'
       DATABASE_PASSWORD: root
       DATABASE_USER: root
       DATABASE_NAME: job_hunt_diary-test
@@ -28,8 +30,19 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: job_hunt_diary-test
+    networks:
+      - unit-test-network
+  phpmyadmin-test:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db-test
+    environment:
+      PMA_HOST: db-test
+      PMA_USER: root
+      PMA_PASSWORD: root
     ports:
-      - "3307:3306"
+      - "4001:80"
     networks:
       - unit-test-network
 networks:

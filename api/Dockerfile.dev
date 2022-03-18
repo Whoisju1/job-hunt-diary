@@ -1,4 +1,8 @@
-FROM node:14-alpine
+FROM node:17
+
+ARG db_host
+
+ARG db_port
 
 WORKDIR /api
 
@@ -10,4 +14,8 @@ COPY ./package.json ./package.json
 
 RUN npm i
 
-CMD ["npm", "run", "dev"]
+RUN chmod 777 ./scripts/wait-for-it.bash
+
+SHELL ["/bin/bash", "-c"]
+
+CMD [ "npm", "run", "docker:serve" ]

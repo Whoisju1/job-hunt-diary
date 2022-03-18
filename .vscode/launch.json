@@ -8,6 +8,12 @@
       "name": "Docker: Attach to Node",
       "type": "node",
       "request": "attach",
+      "sourceMaps": true,
+      "outDir": "build",
+      "outFiles": [
+        "${workspaceFolder}/build/**/*.js",
+        "!**/node_modules/**"
+      ],
       "port": 9229,
       "address": "localhost",
       "localRoot": "${workspaceFolder}/api",
