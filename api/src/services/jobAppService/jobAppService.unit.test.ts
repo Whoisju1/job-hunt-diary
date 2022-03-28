@@ -11,7 +11,11 @@ import {
   Status as StatusModel,
   JobApplication,
 } from '../../models';
-import { createCompany, createContact, createNote, createPosition, createStatus, createUser } from 'src/helpers/testHelpers';
+import {
+  createStatus,
+  createUser,
+  createJobAppInput,
+} from 'src/helpers/testHelpers';
 import { IJobApplication } from 'src/interfaces/modelInterfaces';
 
 
@@ -50,13 +54,7 @@ describe('jobAppService', () => {
   let jobApplicationInput: JobApplicationInput;
 
   beforeEach(() => {
-    jobApplicationInput = {
-      company: createCompany(),
-      contacts: [createContact()],
-      notes: [createNote(), createNote()],
-      position: createPosition(),
-      status: 'Waiting for Next Interview',
-    };
+    jobApplicationInput = createJobAppInput();
   });
 
   describe('jobAppService.create', () => {
@@ -76,6 +74,34 @@ describe('jobAppService', () => {
     });
     it('should create job application', async () => {
       expect(application).toBeDefined;
+    });
+  });
+
+  describe('jobAppService.getOne', () => {
+    let createdJobApp: IJobApplication;
+    let foundJobApp: IJobApplication;
+    beforeEach(async () => {
+      const jobAppInput = createJobAppInput();
+      const input = { userId, statusId, ...jobAppInput };
+      createdJobApp = (await new JobApplication(input).save()).toJSON();
+      const result = await jobAppService.getOne(createdJobApp.id);
+      if(result) {
+        foundJobApp = result;
+      }
+    });
+
+    afterEach(async () => {
+      if (createdJobApp.id) {
+        await JobApplication.destroy({ where: { id: createdJobApp.id }});
+      }
+    });
+
+    it('should be a function', () => {
+      expect(jobAppService.getOne).toBeFunction;
+    });
+
+    it('should return a jobApplication', () => {
+      expect(foundJobApp.id).toBe(createdJobApp.id);
     });
   });
 });

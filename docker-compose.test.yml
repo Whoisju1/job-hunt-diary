@@ -7,7 +7,6 @@ services:
       args:
         db_host: db-test
         db_port: 3306
-    # command: "./scripts/wait-for-it.sh -t 0 -h db-test -p 3306 -- npm run dev"
     volumes:
       - ./api:/api
       - /api/node_modules

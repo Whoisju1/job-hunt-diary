@@ -12,25 +12,25 @@ interface ICompany {
 export class Company extends Model implements ICompany {
   @AllowNull(false)
   @Column(DataType.STRING)
-  name!: string;
+    name!: string;
 
   @AllowNull
   @Column(DataType.STRING)
-  location!: string;
+    location!: string;
 
   @AllowNull
   @Column(DataType.STRING)
-  phone!: string;
+    phone!: string;
 
   @IsEmail
   @AllowNull
   @Column(DataType.STRING)
-  email!: string;
+    email!: string;
 
   @AllowNull(false)
   @ForeignKey(() => JobApplication)
   @Column(DataType.INTEGER)
-  jobApplicationId!: number;
+    jobApplicationId!: number;
 }
 
 interface ICompanyNote {
@@ -46,13 +46,13 @@ export class CompanyNote extends Model implements ICompanyNote {
   @AllowNull(false)
   @ForeignKey(() => Company)
   @Column(DataType.STRING)
-  companyId!: string;
+    companyId!: string;
 
   @Unique
   @AllowNull(false)
   @ForeignKey(() => Note)
   @Column(DataType.STRING)
-  noteId!: string;
+    noteId!: string;
 }
 
 @Table({
@@ -66,19 +66,19 @@ export class Contact extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  lastName!: string;
+    lastName!: string;
 
   @Column(DataType.STRING)
-  alias!: string;
+    alias!: string;
 
   @IsEmail
   @AllowNull
   @Column(DataType.STRING)
-  email!: string;
+    email!: string;
 
   @AllowNull
   @Column(DataType.STRING)
-  phone!: string;
+    phone!: string;
 }
 
 interface IContactNote {
@@ -94,13 +94,13 @@ export class ContactNote extends Model implements IContactNote {
   @ForeignKey(() => Contact)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  contactId!: number;
+    contactId!: number;
 
   @Unique
   @AllowNull(false)
   @ForeignKey(() => Note)
   @Column(DataType.INTEGER)
-  noteId!: number;
+    noteId!: number;
 }
 
 // interface IJobApplication {
@@ -129,25 +129,25 @@ export class JobApplicationNote extends Model implements IJobApplicationNote {
   @AllowNull(false)
   @ForeignKey(() => JobApplication)
   @Column(DataType.INTEGER)
-  jobApplicationId!: number;
+    jobApplicationId!: number;
 
   @Unique
   @AllowNull(false)
   @ForeignKey(() => Note)
   @Column(DataType.INTEGER)
-  noteId!: number;
+    noteId!: number;
 }
 
 @Table
 export class JobPostingInfo extends Model {
   @AllowNull(false)
   @Column(DataType.STRING)
-  source!: string;
+    source!: string;
 
   @AllowNull(false)
   @ForeignKey(() => JobApplication)
   @Column(DataType.INTEGER)
-  jobApplicationId!: number;
+    jobApplicationId!: number;
 }
 
 interface INote {
@@ -160,11 +160,11 @@ interface INote {
 })
 export class Note extends Model implements INote {
   @Column(DataType.STRING)
-  title!: string;
+    title!: string;
 
   @AllowNull(false)
   @Column(DataType.TEXT)
-  body!: string;
+    body!: string;
 }
 
 interface IPosition {
@@ -180,24 +180,24 @@ interface IPosition {
 export class Position extends Model implements IPosition {
   @AllowNull(false)
   @Column(DataType.STRING)
-  name!: string;
+    name!: string;
 
   @Column(DataType.STRING)
-  compensation!: string;
+    compensation!: string;
 
   @Column(DataType.INTEGER)
-  rating!: number;
+    rating!: number;
 
   @Column(DataType.STRING)
-  benefits!: string;
+    benefits!: string;
 
   @HasMany(() => PositionRequirement)
-  requirements!: PositionRequirement[];
+    requirements!: PositionRequirement[];
 
   @AllowNull(false)
   @ForeignKey(() => JobApplication)
   @Column(DataType.INTEGER)
-  jobApplicationId!: number;
+    jobApplicationId!: number;
 }
 
 interface IPositionRequirement {
@@ -208,12 +208,12 @@ interface IPositionRequirement {
 @Table
 export class PositionRequirement extends Model implements IPositionRequirement {
   @Column(DataType.STRING)
-  requirement!: string;
+    requirement!: string;
 
   @AllowNull(false)
   @ForeignKey(() => Position)
   @Column(DataType.INTEGER)
-  positionId!: number;
+    positionId!: number;
 }
 
 interface IStatus {
@@ -225,14 +225,14 @@ interface IStatus {
 export class Status extends Model implements IStatus {
   @AllowNull(false)
   @Column(DataType.STRING)
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  displayName!: string;
+    displayName!: string;
 
   @HasMany(() => JobApplication)
-  jobApplications!: JobApplication[]
+    jobApplications!: JobApplication[];
 }
 
 export interface IUser {
@@ -251,33 +251,33 @@ export interface IUser {
 export class User extends Model implements IUser {
   @AllowNull(false)
   @Column(DataType.STRING)
-  firstName!: string;
+    firstName!: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  lastName!: string;
+    lastName!: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  username!: string;
+    username!: string;
 
   @AllowNull(false)
   @Unique
   @IsEmail
   @Column(DataType.STRING)
-  email!: string;
+    email!: string;
 
   @HasMany(() => JobApplication, { onDelete: 'CASCADE' })
-  jobApplications!: JobApplication[]
+    jobApplications!: JobApplication[];
 
   // TODO: Add validation for phone number
   @Unique
   @Column(DataType.STRING)
-  phone!: string;
+    phone!: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  hashedPass!: string;
+    hashedPass!: string;
 }
 
 @Table({
@@ -286,36 +286,36 @@ export class User extends Model implements IUser {
 })
 export class JobApplication extends Model {
   @Column(DataType.STRING)
-  name!: string;
+    name!: string;
 
   @AllowNull
   @Column(DataType.DATE)
-  dateApplied!: Date;
+    dateApplied!: Date;
 
   @HasOne(() => JobPostingInfo, { onDelete: 'CASCADE' })
-  jobPostingInfo!: JobPostingInfo;
+    jobPostingInfo!: JobPostingInfo;
 
   @BelongsTo(() => User)
-  owner!: User;
+    owner!: User;
 
   @BelongsTo(() => Status)
-  status!: Status;
+    status!: Status;
 
   @HasOne(() => Position, { onDelete: 'CASCADE' })
-  position!: Position;
+    position!: Position;
 
   @HasMany(() => JobApplicationNote)
-  notes!: Note[]
+    notes!: Note[];
 
   @AllowNull(false)
   @ForeignKey(() => Status)
   @Column(DataType.INTEGER)
-  statusId!: number;
+    statusId!: number;
 
   @AllowNull(false)
   @ForeignKey(() => User)
   @Column(DataType.INTEGER)
-  userId!: number;
+    userId!: number;
 }
 
 export default [

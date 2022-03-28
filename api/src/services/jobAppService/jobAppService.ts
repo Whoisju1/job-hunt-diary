@@ -13,7 +13,11 @@ export class JobAppService implements IJobAppService {
   };
 
   public edit!: (jobAppInput: IJobApplicationInput) => Promise<IJobApplication>;
-  public getOne!: (id: string) => Promise<IJobApplication>;
+  public getOne = async (id: string):  Promise<IJobApplication | null> => {
+    const foundApplication = await JobApplication.findOne({where: { id }});
+    if (!foundApplication) return null;
+    return foundApplication.toJSON();
+  };
   public getMany!: () => Promise<IList<IJobApplication>>;
   public deleteOne!: () => Promise<string>;
   public deleteMany!: (ids: string[]) => Promise<string[]>;

@@ -34,4 +34,3 @@ spec:
             - name: NODE_ENV
               value: 'Production'
 
-

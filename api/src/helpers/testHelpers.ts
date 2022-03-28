@@ -3,6 +3,7 @@ import {
   CompanyInput,
   ContactInput,
   InputMaybe,
+  JobApplicationInput,
   NoteInput,
   PositionInput,
 } from 'src/types/graphql-types';
@@ -69,3 +70,11 @@ export async function createStatus(name: string, displayName: string): Promise<I
   const status = (await new StatusModel({ name, displayName }).save()).toJSON();
   return status;
 }
+
+export const createJobAppInput = (): JobApplicationInput => ({
+  company: createCompany(),
+  contacts: [createContact()],
+  notes: [createNote(), createNote()],
+  position: createPosition(),
+  status: faker.lorem.words(4),
+});

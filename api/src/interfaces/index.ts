@@ -19,7 +19,7 @@ export interface IUserService {
 export interface IJobAppService {
   create: (jobAppInput: IJobApplicationInput) => Promise<IJobApplication>;
   edit: (jobAppInput: IJobApplicationInput) => Promise<IJobApplication>;
-  getOne: (id: string) => Promise<IJobApplication>;
+  getOne: (id: string) => Promise<IJobApplication | null>;
   getMany: () => Promise<IList<IJobApplication>>;
   deleteOne:() => Promise<string>;
   deleteMany: (ids: string[]) => Promise<string[]>;
